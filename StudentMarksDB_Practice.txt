@@ -1,0 +1,226 @@
+Microsoft Windows [Version 10.0.26200.8037]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Arpit Shrestha>mongosh
+Current Mongosh Log ID: 69c09da498a8ac2a23114029
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+
+C:\Users\Arpit Shrestha>mongosh "mongodb+srv://cluster0.i8ltjod.mongodb.net/" --apiVersion 1 --username Arpit
+Enter password: ******
+Current Mongosh Log ID: 69c09fd636ba283bc0114029
+Connecting to:          mongodb+srv://<credentials>@cluster0.i8ltjod.mongodb.net/?appName=mongosh+2.8.1
+Using MongoDB:          8.0.20 (API Version 1)
+Using Mongosh:          2.8.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+Atlas atlas-13a1mp-shard-0 [primary] test> use Testing
+switched to db Testing
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.insertMany([{name:"Arpit", age:18},{name:"Riwaj", age:18}, {name:"Pratik", age:19}, {name:"Arpit",Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.insertMany([{name:"Arpit", age:18},{name:"Riwaj", age:18}, {name:"Pratik", age:19}, {name:"Arpit", age:18}, {name:"Anisha", age:20}, {name:"Alina", age:17}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c0a32236ba283bc011402a'),
+    '1': ObjectId('69c0a32236ba283bc011402b'),
+    '2': ObjectId('69c0a32236ba283bc011402c'),
+    '3': ObjectId('69c0a32236ba283bc011402d'),
+    '4': ObjectId('69c0a32236ba283bc011402e'),
+    '5': ObjectId('69c0a32236ba283bc011402f')
+  }
+}
+Atlas atlas-13a1mp-shard-0 [primary] Testing> show dbs
+Testing        72.00 KiB
+sample_mflix  117.20 MiB
+admin         360.00 KiB
+local          20.71 GiB
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({name : "Arpit" })
+[
+  { _id: ObjectId('69c0a32236ba283bc011402a'), name: 'Arpit', age: 18 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find().preety()
+TypeError: db.students.find().preety is not a function
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find().pretty()
+[
+  { _id: ObjectId('69c0a32236ba283bc011402a'), name: 'Arpit', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402b'), name: 'Riwaj', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402c'), name: 'Pratik', age: 19 },
+  { _id: ObjectId('69c0a32236ba283bc011402e'), name: 'Anisha', age: 20 },
+  { _id: ObjectId('69c0a32236ba283bc011402f'), name: 'Alina', age: 17 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find().sort({age :17})
+MongoInvalidArgumentError: Invalid sort direction: 17
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find().sort({ age: 1 })
+[
+  { _id: ObjectId('69c0a32236ba283bc011402f'), name: 'Alina', age: 17 },
+  { _id: ObjectId('69c0a32236ba283bc011402a'), name: 'Arpit', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402b'), name: 'Riwaj', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402c'), name: 'Pratik', age: 19 },
+  { _id: ObjectId('69c0a32236ba283bc011402e'), name: 'Anisha', age: 20 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({age:17})
+[
+  { _id: ObjectId('69c0a32236ba283bc011402f'), name: 'Alina', age: 17 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({age :{$gt :18}})
+[
+  { _id: ObjectId('69c0a32236ba283bc011402c'), name: 'Pratik', age: 19 },
+  { _id: ObjectId('69c0a32236ba283bc011402e'), name: 'Anisha', age: 20 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({age :{$lt :18}})
+[
+  { _id: ObjectId('69c0a32236ba283bc011402f'), name: 'Alina', age: 17 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({$or:[{age:18},{age:20}]})
+[
+  { _id: ObjectId('69c0a32236ba283bc011402a'), name: 'Arpit', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402b'), name: 'Riwaj', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402e'), name: 'Anisha', age: 20 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.studentMarksDB
+Testing.studentMarksDB
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.insertMany([
+|   { name: "Arpit", age: 20, marks: 85 },
+|   { name: "Osan", age: 22, marks: 72 },
+|   { name: "Deepu", age: 21, marks: 90 },
+|   { name: "Ram", age: 19, marks: 55 },
+|   { name: "Sita", age: 20, marks: 40 }
+| ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c0a74e36ba283bc0114030'),
+    '1': ObjectId('69c0a74e36ba283bc0114031'),
+    '2': ObjectId('69c0a74e36ba283bc0114032'),
+    '3': ObjectId('69c0a74e36ba283bc0114033'),
+    '4': ObjectId('69c0a74e36ba283bc0114034')
+  }
+}
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find()
+[
+  { _id: ObjectId('69c0a32236ba283bc011402a'), name: 'Arpit', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402b'), name: 'Riwaj', age: 18 },
+  { _id: ObjectId('69c0a32236ba283bc011402c'), name: 'Pratik', age: 19 },
+  { _id: ObjectId('69c0a32236ba283bc011402e'), name: 'Anisha', age: 20 },
+  { _id: ObjectId('69c0a32236ba283bc011402f'), name: 'Alina', age: 17 },
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114030'),
+    name: 'Arpit',
+    age: 20,
+    marks: 85
+  },
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114031'),
+    name: 'Osan',
+    age: 22,
+    marks: 72
+  },
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114032'),
+    name: 'Deepu',
+    age: 21,
+    marks: 90
+  },
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114033'),
+    name: 'Ram',
+    age: 19,
+    marks: 55
+  },
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114034'),
+    name: 'Sita',
+    age: 20,
+    marks: 40
+  }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({marks:{$lt :50}})
+[
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114034'),
+    name: 'Sita',
+    age: 20,
+    marks: 40
+  }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find().sort({marks:-1}).limit(1)
+[
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114032'),
+    name: 'Deepu',
+    age: 21,
+    marks: 90
+  }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find().sort({marks:1}).limit(1)
+[
+  { _id: ObjectId('69c0a32236ba283bc011402a'), name: 'Arpit', age: 18 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.student.updateOne({name:Arpit}, {$set: {garade:"A"}})
+ReferenceError: Arpit is not defined
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.student.updateOne({name:Arpit}, {$set: {garade:"95"}})
+ReferenceError: Arpit is not defined
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(undefineAtlas atlas-13a1mp-shardAtlas atlas-13a1mp-shard-0 [primary] Testing> " },
+|   { $set: { marks: 65 } }
+| )
+Uncaught:
+SyntaxError: Unterminated string constant. (1:0)
+
+> 1 | " },
+    | ^
+  2 |   { $set: { marks: 65 } }
+  3 | )
+  4 |
+
+Atlas atlas-13a1mp-shard-0 [primary] Testing> clear
+ReferenceError: clear is not defined
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.updateOne(
+|   { name: "Ram" },
+|   { $set: { marks: 65 } }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.student.find()
+
+Atlas atlas-13a1mp-shard-0 [primary] Testing> mongosh
+ReferenceError: mongosh is not defined
+Atlas atlas-13a1mp-shard-0 [primary] Testing> // To find lowest marks only among students WHO HAVE marks:
+| db.students.find({ marks: { $exists: true } }).sort({ marks: 1 }).limit(1)
+[
+  {
+    _id: ObjectId('69c0a74e36ba283bc0114034'),
+    name: 'Sita',
+    age: 20,
+    marks: 40
+  }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.deleteone({name:"Sita"})
+TypeError: db.students.deleteone is not a function
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.deleteOne({ name: "Sita" })
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.countDocuments({ mmarks: { $gte: 50 } })
+4
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.find({}, { name: 1, marks: 1, _id: 0 })
+[
+  { name: 'Arpit' },
+  { name: 'Riwaj' },
+  { name: 'Pratik' },
+  { name: 'Anisha' },
+  { name: 'Alina' },
+  { name: 'Arpit', marks: 85 },
+  { name: 'Osan', marks: 72 },
+  { name: 'Deepu', marks: 90 },
+  { name: 'Ram', marks: 65 }
+]
+Atlas atlas-13a1mp-shard-0 [primary] Testing> db.students.countDocuments({marks :{$gte: 60}})
+4
+Atlas atlas-13a1mp-shard-0 [primary] Testing>
